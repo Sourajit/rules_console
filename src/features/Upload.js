@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Form, Field } from 'react-final-form';
 import Dropzone,{useDropzone} from 'react-dropzone';
 import styles from './counter/Counter.module.css';
+import axios, { post } from 'axios';
 
 export function Upload() {
   const fileUpload = (file) =>{
