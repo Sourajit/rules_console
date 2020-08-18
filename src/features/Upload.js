@@ -5,19 +5,22 @@ import Dropzone,{useDropzone} from 'react-dropzone';
 import styles from './counter/Counter.module.css';
 
 export function Upload() {
+  const fileUpload = (file) =>{
+    const url = 'http://example.com/file-upload';
+    const formData = new FormData();
+    formData.append('file',file)
+    const config = {
+        headers: {
+            'content-type': 'multipart/form-data'
+        }
+    }
+    return  post(url, formData,config)
+  }
   const submitFile = (acceptedFiles) => {
-    acceptedFiles.forEach((file) => {
-      const reader = new FileReader()
+    fileUpload(acceptedFiles[0]).then(()=>{
+      alert("Upload Successful");
+    });
 
-      reader.onabort = () => console.log('file reading was aborted')
-      reader.onerror = () => console.log('file reading has failed')
-      reader.onload = () => {
-      // Do whatever you want with the file contents
-        const binaryStr = reader.result
-        console.log(binaryStr)
-      }
-      reader.readAsArrayBuffer(file)
-    })
   }
   const {
     acceptedFiles,
